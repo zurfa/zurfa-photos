@@ -7,7 +7,7 @@ class Files(object):
 	"""handles file related stuff"""
 	def __init__(self):
 		super(Files, self).__init__()
-		self.lg	= logger.Logger()
+		self.lg	= logger.Logger('Files')
 		
 	def get_imports(self,Dir=None):
 		"""returns list of available files in a directory"""
