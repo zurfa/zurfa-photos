@@ -1,9 +1,9 @@
 import logging
 
-class logger(object):
+class Logger(object):
 	"""logs things"""
 	def __init__(self,Name=__name__):
-		super(logger, self).__init__()
+		super(Logger, self).__init__()
 		#  Do setup
 		self.setup(Name)
 		
@@ -12,7 +12,7 @@ class logger(object):
 		logger = logging.getLogger(Name)
 		logger.setLevel(logging.DEBUG)
 
-		CLog	= logging.DEBUG	# Console log level
+		CLog	= logging.DEBUG # Console log level
 		FLog	= logging.DEBUG	# Logfile log level
 		Logfile	= 'library.log'	# Logfile
 		# Log format
