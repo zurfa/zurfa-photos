@@ -16,7 +16,7 @@ class Logger(object):
 		FLog	= logging.DEBUG	# Logfile log level
 		Logfile	= 'library.log'	# Logfile
 		# Log format
-		Format	= "[%(asctime)s] %(levelname)s (%(name)s) %(module)s.%(funcName)s: %(message)s"
+		Format	= "[%(asctime)s] %(levelname)s (%(module)s) %(name)s.%(funcName)s: %(message)s"
 		
 		# Create logfile handler
 		fh = logging.FileHandler(Logfile)
