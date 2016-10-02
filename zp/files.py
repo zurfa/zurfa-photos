@@ -27,3 +27,27 @@ class Files(object):
 			else:
 				self.lg.log.error("No files found in path")
 				return False
+
+	def copy_file(self,In,Out):
+		try:
+			shutil.copy2(In,Out)
+		except IOError:
+			self.lg.log.error("File does not exist or is not readable")
+			return False
+		except shutil.Error:
+			self.lg.log.error("Destination does not exist or is not writeable")
+			return False
+		else:
+			return True
+
+	def move_file(self,In,Out):
+		try:
+			shutil.move(In,Out)
+		except IOError:
+			self.lg.log.error("File does not exist or is not readable")
+			return False
+		except shutil.Error:
+			self.lg.log.error("Destination does not exist or is not writeable")
+			return False
+		else:
+			return True
