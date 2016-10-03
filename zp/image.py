@@ -107,6 +107,15 @@ class Image(object):
 			else:
 				return	(Image,Options)
 
+	def image_dimensions(self,File):
+		Image	= self.open_image(File)
+
+		if Image:
+			Size	= Image.size
+			return Size
+		else:
+			self.lg.log.error("Unable to determine size of %s" % File)
+
 	def p_hash(self,Image,Size=None):
 		if not Size:
 			Size	= config.PHASH_SIZE
