@@ -1,6 +1,7 @@
 import logger
 
 import os
+import hashlib
 
 
 class Files(object):
@@ -51,3 +52,22 @@ class Files(object):
 			return False
 		else:
 			return True
+
+	def sha1_checksum(self,File):
+		"""calculate sha1 checksum on given file."""
+
+		BLOCKSIZE	= 65536
+		hasher	= hashlib.sha1()
+		handle	= self.open_file(File)
+		if handle:
+			with handle as afile:
+				buf = afile.read(BLOCKSIZE)
+				while len(buf) > 0:
+					hasher.update(buf)
+					buf = afile.read(BLOCKSIZE)
+			checksum	= hasher.hexdigest()
+			SHA1	= checksum.upper()
+			self.lg.log.info("Generated SHA1 checksum for %s : %s" % (File,SHA1))
+			return(SHA1)
+		else:
+			self.lg.log.info("Unable to generate checksum for %s" % File)
