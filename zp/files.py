@@ -29,6 +29,15 @@ class Files(object):
 				self.lg.log.error("No files found in path")
 				return False
 
+	def open_file(self,In,Mode='r'):
+		try:
+			f	= open(In, Mode)
+		except IOError:
+			self.lg.log.error("Error opening file %s" % In)
+			return False
+		else:
+			return f
+
 	def copy_file(self,In,Out):
 		try:
 			shutil.copy2(In,Out)
