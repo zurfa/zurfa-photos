@@ -4,6 +4,7 @@ import exp
 
 import os
 import time
+import shutil
 import hashlib
 import logging
 
@@ -15,12 +16,9 @@ class Files(object):
 		self.lg	= logger.Logger()
 		self.lg.setup(self.__class__.__name__)
 
-	global lg
-	lg	= logger.Logger('Files')
-		
 	def get_imports(self,Dir=None):
 		"""returns list of valid available images in a directory"""
-		valid	= ['.jpg','.jpeg']
+		valid	= ['.jpg','.jpeg','.txt']
 		if not Dir:
 			# Did the user specify a directory?
 			self.lg.logger.error("Directory not specified or invalid")
@@ -41,7 +39,7 @@ class Files(object):
 						ext	= os.path.splitext(File)[1]
 						if ext in valid:
 							# File has a valid extension
-							file_paths.append(File)
+							file_paths.append(("%s%s" % (Dir,File)))
 						else:
 							# File does not have a valid extension
 							pass
@@ -63,10 +61,13 @@ class Files(object):
 		try:
 			f	= open(In, Mode)
 		except IOError:
-			return False
 			self.lg.logger.error("Error opening file %s" % In)
+			raise IOError
 		else:
 			return f
+
+	def close_file(self,Handle):
+			return Handle.close()
 
 	def copy_file(self,In,Out):
 		try:
@@ -92,14 +93,18 @@ class Files(object):
 		else:
 			return True
 
-	def sha1_checksum(self,File):
+	def sha1_checksum(self,File=False,Object=False):
 		"""calculate sha1 checksum on given file."""
 
 		BLOCKSIZE	= 65536
 		hasher	= hashlib.sha1()
-		handle	= self.open_file(File)
-		if handle:
+
+		try:
+			handle	= self.open_file(File)
+		except IOError:
 			self.lg.logger.info("Unable to generate checksum for %s" % File)
+			return False
+		else:
 			with handle as afile:
 				buf = afile.read(BLOCKSIZE)
 				while len(buf) > 0:
@@ -107,6 +112,19 @@ class Files(object):
 					buf = afile.read(BLOCKSIZE)
 			checksum	= hasher.hexdigest()
 			SHA1	= checksum.upper()
-			return(SHA1)
-		else:
 			# self.lg.logger.info("Generated SHA1 checksum for %s" % File)
+			return SHA1
+		finally:
+			handle.close()
+
+	@staticmethod
+	def import_session_create():
+		# Make import session dir
+		time_struct	= time.gmtime(time.time())
+		timestamp	= time.strftime(config.DIR_PROC_FORMAT,time_struct)
+		Export		= "%s%s" % (config.DIR_PROCESSED,timestamp)
+		try:
+			os.mkdir(Export)
+		except OSError:
+			return OSError
+		return Export
