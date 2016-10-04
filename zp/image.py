@@ -22,6 +22,14 @@ class Image(object):
 		else:
 			return Image
 
+	def close_image(self,Handle):
+		try:
+			PIL.Image.close(Handle)
+		except:
+			return False
+		else:
+			return True
+
 	def save_image(self,Image,Dest,Options=None):
 		try:
 			if Options:
@@ -139,4 +147,18 @@ class Image(object):
 			self.lg.logger.info("Generated new DHASH for %s %s" % (Image,Hash))
 			return Hash
 		else:
-			return False
+			return False	@staticmethod
+	@staticmethod
+	def is_image(File):
+		Image	= False
+		try:
+			Image	= PIL.Image.open(File)
+			Image.load()
+		except IOError:
+			raise IOError
+		else:
+			return True
+		finally:
+			if Image:
+				Image.close()
+			
