@@ -62,8 +62,11 @@ class Image(object):
 			else:
 				return	(Image,Options)
 
-	def large_thumb(self,File,Dest=None):
-		Image	= self.open_image(File)
+	def large_thumb(self,File,Dest=False,Obj=False):
+		if Obj:
+			Image	= File
+		else:
+			Image	= self.open_image(File)
 
 		# Set additional options
 		Options	= {}
@@ -79,9 +82,14 @@ class Image(object):
 				return	(Image,Dest,Options)
 			else:
 				return	(Image,Options)
+		else:
+			return False
 
-	def medium_thumb(self,File,Dest=None):
-		Image	= self.open_image(File)
+	def medium_thumb(self,File,Dest=None,Obj=False):
+		if Obj:
+			Image	= File
+		else:
+			Image	= self.open_image(File)
 
 		# Set additional options
 		Options	= {}
@@ -97,9 +105,14 @@ class Image(object):
 				return	(Image,Dest,Options)
 			else:
 				return	(Image,Options)
+		else:
+			return False
 
-	def small_thumb(self,File,Dest=None):
-		Image	= self.open_image(File)
+	def small_thumb(self,File,Dest=None,Obj=False):
+		if Obj:
+			Image	= File
+		else:
+			Image	= self.open_image(File)
 
 		# Set additional options
 		Options	= {}
@@ -115,6 +128,8 @@ class Image(object):
 				return	(Image,Dest,Options)
 			else:
 				return	(Image,Options)
+		else:
+			return False
 
 	def image_dimensions(self,File):
 		Image	= self.open_image(File)
@@ -147,7 +162,8 @@ class Image(object):
 			self.lg.logger.info("Generated new DHASH for %s %s" % (Image,Hash))
 			return Hash
 		else:
-			return False	@staticmethod
+			return False
+
 	@staticmethod
 	def is_image(File):
 		Image	= False
