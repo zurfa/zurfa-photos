@@ -30,8 +30,10 @@ class Files(object):
 				raise exp.DirectoryError(Dir)
 			else:
 				file_paths	= []
-				if len(Files) > 0:
+				Lf	= len(Files)
+				if Lf > 0:
 					# Found files in directory
+					lg.log.info("Searching for files in %s" % Dir)
 					for File in Files:
 						ext	= os.path.splitext(File)[1]
 						if ext in valid:
@@ -40,8 +42,10 @@ class Files(object):
 						else:
 							# File does not have a valid extension
 							pass
-					if len(file_paths) > 0:
+					Lfp	= len(file_paths)
+					if Lfp > 0:
 						# Found atleast one valid file
+						lg.log.info("Found %s/%s valid files in %s" % (Lfp,Lf,Dir))
 						return file_paths
 					else:
 						# Did not find any valid files
