@@ -1,6 +1,9 @@
 import logger
+import config
+import exp
 
 import os
+import time
 import hashlib
 
 
@@ -8,26 +11,46 @@ class Files(object):
 	"""handles file related stuff"""
 	def __init__(self):
 		super(Files, self).__init__()
-		self.lg	= logger.Logger('Files')
+
+	global lg
+	lg	= logger.Logger('Files')
 		
 	def get_imports(self,Dir=None):
-		"""returns list of available files in a directory"""
+		"""returns list of valid available images in a directory"""
+		valid	= ['.jpg','.jpeg']
 		if not Dir:
-			self.lg.log.error("Directory not specified or invalid")
-			return False
+			# Did the user specify a directory?
+			lg.log.error("Directory not specified or invalid")
+			raise OSError
 		else:
-			file_paths = []
-			self.lg.log.info("Walking through %s" % Dir)
-			for root, directories, files in os.walk(Dir):
-				for filename in files:
-					filepath = os.path.join(root, filename)
-					file_paths.append(filepath)
-			if len(file_paths) > 0:
-				self.lg.log.info("Found %s files in %s" % (len(file_paths),Dir))
-				return file_paths
+			try:
+				Files		= os.listdir(Dir)
+			except OSError:
+				lg.log.critical("Error opening directory, does it exist? %s" % Dir)
+				raise exp.DirectoryError(Dir)
 			else:
-				self.lg.log.error("No files found in path")
-				return False
+				file_paths	= []
+				if len(Files) > 0:
+					# Found files in directory
+					for File in Files:
+						ext	= os.path.splitext(File)[1]
+						if ext in valid:
+							# File has a valid extension
+							file_paths.append(File)
+						else:
+							# File does not have a valid extension
+							pass
+					if len(file_paths) > 0:
+						# Found atleast one valid file
+						return file_paths
+					else:
+						# Did not find any valid files
+						lg.log.error("Did not find any valid files in directory. %s" % Dir)
+						raise exp.ValidFilesError(Dir)
+				else:
+					# Did not find files in directory
+					lg.log.error("Did not find any files in directory. %s" % Dir)
+					raise exp.NullDirectoryError(Dir)
 
 	def open_file(self,In,Mode='r'):
 		try:
