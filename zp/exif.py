@@ -68,9 +68,10 @@ class Exif(object):
         if 0x8825 in RAW:
             # Remove everything except GPS data
             RAW = RAW[0x8825]
-            if (0x0001,0x0002,0x0003,0x0004) in RAW:
-                Lat = self.gps_dms_dd(GPS['lat'],GPS['lat_ref'])
-                Lon = self.gps_dms_dd(GPS['lon'],GPS['lon_ref'])
+            tags = (0x0001,0x0002,0x0003,0x0004)
+            if  all(tag in RAW for tag in tags):
+                Lat = self.gps_dms_dd(RAW[0x0002],RAW[0x0001])
+                Lon = self.gps_dms_dd(RAW[0x0004],RAW[0x0003])
                 return (Lat,Lon)
             else:
                 # No GPS data found in EXIF
