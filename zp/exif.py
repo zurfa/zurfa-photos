@@ -57,6 +57,8 @@ class Exif(object):
             if 'taken' in Tags:
                 # Assume timestamp is UTC
                 Values['taken']     = self.unix_time(Tags['taken'])
+            if Dump:
+                Values['exif_dump'] = str(RAW).encode('hex_codec')
             return Values
         else:
             # No EXIF data found
