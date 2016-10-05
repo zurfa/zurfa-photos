@@ -173,7 +173,7 @@ class Image(object):
         except IOError:
             raise IOError
         else:
-            return True
+            return (Image.size[0],Image.size[1],Image.format)
         finally:
             if Image:
                 Image.close()
