@@ -5,6 +5,7 @@ import zp.files as files
 import zp.config as config
 import zp.exp as exp
 import zp.image as image
+import zp.data as data
 
 
 import os
@@ -71,10 +72,11 @@ def import_file(File, Export=False, Options=None):
     imp = importer.Importer()
     ex = exif.Exif()
     im = image.Image()
+    dt = data.SQLLite()
 
     try:
         os.stat(File)
-        im.is_image(File)
+        width, height, imformat = im.is_image(File)
     except OSError:
         # File doesn't exist or isn't readable
         lg.logger.error("Unable to read file %s " % File)
@@ -89,7 +91,7 @@ def import_file(File, Export=False, Options=None):
 
         Data = {}
         # Generate EXIF data
-        EXIF = ex.exif_tags(File)
+        EXIF = ex.exif_tags(File,True)
         if EXIF:
             Data.update(EXIF)
         else:
@@ -104,12 +106,19 @@ def import_file(File, Export=False, Options=None):
             Data.update({'ufid': UFID})
         # Generate paths
         ORIG = os.path.split(File)[1]
+        EXT  = os.path.splitext(File)[1]
         if UFID:
             DEST = "%s%s%s" % (config.DIR_LIBRARY, UFID,
-                               os.path.splitext(File)[1])
-            Data.update({'path': DEST, 'original': ORIG})
+                               EXT)
+            Data.update({'path': DEST, 'origin': ORIG, 'extension': EXT})
         # Generate timestamp
         Data.update({'added': int(time.time())})
+        # Get filesize
+        Data.update({'size': os.path.getsize(File)})
+        # Get dimensions
+        Data.update({'width':width,'height':height})
+        # Get format
+        Data.update({'format':imformat})
 
         if 'ufid' in Data and 'path' in Data:
             try:
@@ -128,7 +137,8 @@ def import_file(File, Export=False, Options=None):
                         # Export directory is a valid directory
                         if fi.move_file(File, Export):
                             # Successfully moved original file to processed
-                            # files
+                            dt.add_to_library(Data)
+                            dt.commit()
                             return Data
                         else:
                             # Unable to move original file to processed files
