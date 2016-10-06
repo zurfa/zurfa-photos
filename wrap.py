@@ -177,14 +177,12 @@ def make_thumbs(File):
     SMALL[0].close()
 
 def make_all_thumbs():
-    dt = data.SQLLite()
-    items = dt.get_from_library()
+    items = data.Data.get_from_library()
     total=len(items)
     for item in items:
-        Index=item[0]
-        UFID=item[1]
-        Image=item[2]
-        # print "%s %s %s" % (Index,UFID,Image)
+        Index=item['id']
+        UFID=item['ufid']
+        Image=item['path']
         print "[%s/%s] Making thumbnails for %s" % (Index,total,Image)
         make_thumbs(Image)
 
