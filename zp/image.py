@@ -151,6 +151,7 @@ class Image(object):
             return Hash
         else:
             return False
+        ImageF.close()
 
     def d_hash(self,Image,Size=None):
         if not Size:
@@ -163,6 +164,7 @@ class Image(object):
             return Hash
         else:
             return False
+        ImageF.close()
 
     @staticmethod
     def is_image(File):
