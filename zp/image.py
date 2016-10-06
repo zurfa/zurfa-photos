@@ -147,7 +147,7 @@ class Image(object):
         ImageF  = self.open_image(Image)
         if Image:
             Hash    = str(imagehash.phash(ImageF,Size)).upper()
-            self.lg.logger.info("Generated new PHASH for %s %s" % (Image,Hash))
+            # self.lg.logger.info("Generated new PHASH for %s %s" % (Image,Hash))
             return Hash
         else:
             return False
@@ -160,7 +160,7 @@ class Image(object):
         ImageF  = self.open_image(Image)
         if Image:
             Hash    = str(imagehash.dhash(ImageF,Size)).upper()
-            self.lg.logger.info("Generated new DHASH for %s %s" % (Image,Hash))
+            # self.lg.logger.info("Generated new DHASH for %s %s" % (Image,Hash))
             return Hash
         else:
             return False
@@ -173,7 +173,7 @@ class Image(object):
         ImageF  = self.open_image(Image)
         if Image:
             Hash    = str(imagehash.whash(ImageF,Size)).upper()
-            self.lg.logger.info("Generated new WHASH for %s %s" % (Image,Hash))
+            # self.lg.logger.info("Generated new WHASH for %s %s" % (Image,Hash))
             return Hash
         else:
             return False
