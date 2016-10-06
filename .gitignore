@@ -89,3 +89,10 @@ ENV/
 .ropeproject
 
 /*.jpg
+
+
+
+*.xz
+*.db
+*.db.*
+*.sublime-*
