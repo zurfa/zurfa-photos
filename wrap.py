@@ -186,3 +186,17 @@ def make_all_thumbs():
         print "[%s/%s] Making thumbnails for %s" % (Index,total,Image)
         make_thumbs(Image)
 
+def make_hash(TYPE,File):
+    im = image.Image()
+    if TYPE == 'phash':
+        # Generate perception hash
+        return im.p_hash(File)
+    elif TYPE == 'dhash':
+        # Generate difference hash
+        return im.d_hash(File)
+    elif TYPE == 'whash':
+        # Generate wavelet hash
+        return im.w_hash(File)
+    else:
+        # Invalid hash type specified
+        return False
