@@ -54,7 +54,8 @@ class Data(object):
     def __init__(self):
         super(Data, self).__init__()
 
-    def add_to_library(self,data,Close=True):
+    @staticmethod
+    def add_to_library(data,Close=True):
         # library = session.query(Library)
         try:
             item    = Library(**data)
