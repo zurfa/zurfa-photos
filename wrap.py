@@ -72,7 +72,7 @@ def import_file(File, Export=False, Options=None):
     imp = importer.Importer()
     ex = exif.Exif()
     im = image.Image()
-    dt = data.SQLLite()
+    dt = data.Data()
 
     try:
         os.stat(File)
@@ -138,7 +138,6 @@ def import_file(File, Export=False, Options=None):
                         if fi.move_file(File, Export):
                             # Successfully moved original file to processed
                             dt.add_to_library(Data)
-                            dt.commit()
                             return Data
                         else:
                             # Unable to move original file to processed files
