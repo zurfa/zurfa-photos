@@ -60,6 +60,8 @@ def import_directory(Dir=False):
                 else:
                     # Make thumbnails
                     make_thumbs(imported['path'])
+                    # Generate hashes
+                    make_hash('all',imported['path'])
             if len(bad_files) > 0:
                 for file in bad_files:
                     lg.logger.warning("Unable to import %s" % file)
@@ -197,6 +199,13 @@ def make_hash(TYPE,File):
     elif TYPE == 'whash':
         # Generate wavelet hash
         return im.w_hash(File)
+    elif TYPE == 'all':
+        # Generate all hashes
+        PHASH   = im.p_hash(File)
+        DHASH   = im.d_hash(File)
+        WHASH   = im.w_hash(File)
+        hashes  = {'phash':PHASH, 'dhash':DHASH, 'WHASH':WHASH}
+        return hashes
     else:
         # Invalid hash type specified
         return False
