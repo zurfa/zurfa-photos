@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Numeric, LargeBinary
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker, defer
 import sqlalchemy.exc
 import time
 import config
@@ -69,3 +69,17 @@ class Data(object):
         finally:
             if Close:
                 db_session.remove()
+
+    @staticmethod
+    def get_from_library():
+        try:
+            Query   = db_session.query(Library)
+            Query   = Query.options(defer('exif_dump'))
+        except sqlalchemy.exc.IntegrityError:
+            return False
+        else:
+            data    = []
+            for item in Query:
+                item = item.__dict__
+                data.append(item)
+            return data
