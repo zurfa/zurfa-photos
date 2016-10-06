@@ -12,4 +12,5 @@ Nothing special about it ;)
 ## History
 
 2016-10-01 Starting fresh rewrite
+
 2016-10-06 Started using SQLAlchemy
