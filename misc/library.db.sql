@@ -1,10 +1,20 @@
 --
--- File generated with SQLiteStudio v3.1.0 on Mi. Okt. 5 17:25:27 2016
+-- File generated with SQLiteStudio v3.1.0 on Do. Okt. 6 14:35:30 2016
 --
 -- Text encoding used: UTF-8
 --
 PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
+
+-- Table: hashes
+CREATE TABLE hashes (
+    id    INTEGER      PRIMARY KEY,
+    ufid  VARCHAR (10) REFERENCES library (ufid),
+    phash VARCHAR (56),
+    dhash VARCHAR (56),
+    whash VARCHAR (64) 
+);
+
 
 -- Table: library
 CREATE TABLE library (
@@ -25,7 +35,8 @@ CREATE TABLE library (
     lon       DECIMAL (15, 11),
     device    VARCHAR (32),
     width     INTEGER (5),
-    height    INTEGER (5) 
+    height    INTEGER (5),
+    exif_dump BLOB
 );
 
 
