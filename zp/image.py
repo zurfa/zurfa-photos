@@ -166,6 +166,20 @@ class Image(object):
             return False
         ImageF.close()
 
+    def w_hash(self,Image,Size=None):
+        if not Size:
+            Size    = config.WHASH_SIZE
+
+        ImageF  = self.open_image(Image)
+        if Image:
+            Hash    = str(imagehash.whash(ImageF,Size)).upper()
+            self.lg.logger.info("Generated new WHASH for %s %s" % (Image,Hash))
+            return Hash
+        else:
+            return False
+        ImageF.close()
+
+
     @staticmethod
     def is_image(File):
         Image   = False
