@@ -200,3 +200,11 @@ def make_hash(TYPE,File):
     else:
         # Invalid hash type specified
         return False
+
+def make_all_hashes():
+    libData = data.Data.get_from_library()
+
+    for item in libData:
+        File = item['path']
+        hash = make_hash('phash',File)
+        print "Generated phash for %s%s [%s]" % (item['ufid'],item['extension'],hash)
