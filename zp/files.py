@@ -17,7 +17,7 @@ class Files(object):
         self.lg.setup(self.__class__.__name__)
 
     def get_imports(self,Dir=None):
-        """returns list of valid available images in a directory"""
+        """Generates list of files in specified (default if not) directory with valid extensions"""
         valid   = ['.jpg','.jpeg','.txt']
         if not Dir:
             # Did the user specify a directory?
@@ -58,6 +58,7 @@ class Files(object):
                     raise exp.NullDirectoryError(Dir)
 
     def open_file(self,In,Mode='r'):
+        """Opens a file and returns a file handle"""
         try:
             f   = open(In, Mode)
         except IOError:
@@ -67,9 +68,11 @@ class Files(object):
             return f
 
     def close_file(self,Handle):
+        """Takes a file handle and closes it"""
             return Handle.close()
 
     def copy_file(self,In,Out):
+        """Copy file from In path to Out path"""
         try:
             shutil.copy2(In,Out)
         except IOError:
@@ -82,6 +85,7 @@ class Files(object):
             return True
 
     def move_file(self,In,Out):
+        """Move file from In path to Out path"""
         try:
             shutil.move(In,Out)
         except IOError:
@@ -94,7 +98,7 @@ class Files(object):
             return True
 
     def sha1_checksum(self,File=False,Object=False):
-        """calculate sha1 checksum on given file."""
+        """Calculate sha1 checksum on given file."""
 
         BLOCKSIZE   = 65536
         hasher  = hashlib.sha1()
@@ -119,6 +123,7 @@ class Files(object):
 
     @staticmethod
     def import_session_create():
+        """Creates a datestamp unique directory for processed files"""
         # Make import session dir
         time_struct = time.gmtime(time.time())
         timestamp   = time.strftime(config.DIR_PROC_FORMAT,time_struct)

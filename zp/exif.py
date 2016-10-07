@@ -11,7 +11,7 @@ import re
 
 
 class Exif(object):
-    """EXIF related methods"""
+    """Core EXIF methods, for parsing and generation and formatting"""
     def __init__(self):
         super(Exif, self).__init__()
         # self.lg = logger.logger
@@ -82,6 +82,7 @@ class Exif(object):
         
     @staticmethod
     def gps_dms_dd(DMS,Direction):
+        """Converts [Degrees, Minutes, Seconds] to Decimal form GPS coordinates"""
         DEG = DMS[0][0]
         MIN = DMS[1][0]
         SEC = (DMS[2][0]/DMS[2][1])

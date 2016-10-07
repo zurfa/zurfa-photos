@@ -19,6 +19,7 @@ lg = logger.Logger()
 lg.setup(__name__)
 
 class Library(Base):
+    """SQLAlchemy schema for 'library' table"""
     __tablename__   = 'library'
 
     id          = Column(Integer, primary_key=True)
@@ -41,6 +42,7 @@ class Library(Base):
     exif_dump   = Column(LargeBinary)
 
 class Hashes(Base):
+    """SQLAlchemy schema for 'hashes' table"""
     __tablename__   = 'hashes'
 
     id          = Column(Integer, primary_key=True)
@@ -50,7 +52,7 @@ class Hashes(Base):
     whash       = Column(String(64))
 
 class Data(object):
-    """docstring for Data"""
+    """Library specific data functions wrapper"""
     def __init__(self):
         super(Data, self).__init__()
 
