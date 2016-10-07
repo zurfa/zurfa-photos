@@ -96,3 +96,6 @@ ENV/
 *.db
 *.db.*
 *.sublime-*
+docs/
+image-compression
+test.py
