@@ -1,11 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Numeric, LargeBinary
 from sqlalchemy.orm import scoped_session, sessionmaker, defer
 import sqlalchemy.exc
-import time
-import config
+# zp
+import zp.config as config
+# zp.core
 import logger
+# zp.models
+from zp.models.library import Library
+from zp.models.library import Hashes
+
 
 
 engine  = create_engine('sqlite:///%s' % config.DATABASE, echo=False)
@@ -18,38 +22,6 @@ Base.query = db_session.query_property()
 lg = logger.Logger()
 lg.setup(__name__)
 
-class Library(Base):
-    """SQLAlchemy schema for 'library' table"""
-    __tablename__   = 'library'
-
-    id          = Column(Integer, primary_key=True)
-    ufid        = Column(String(10), unique=True)
-    path        = Column(String(128))
-    origin      = Column(String(64))
-    size        = Column(Integer)
-    checksum    = Column(String(40))
-    added       = Column(Integer)
-    updated     = Column(Integer, default=int(time.time()))
-    extension   = Column(String(7))
-    format      = Column(String(10))
-    category    = Column(String(10))
-    taken       = Column(Integer)
-    lat         = Column(Numeric(15,11))
-    lon         = Column(Numeric(15,11))
-    device      = Column(String(32))
-    width       = Column(Integer)
-    height      = Column(Integer)
-    exif_dump   = Column(LargeBinary)
-
-class Hashes(Base):
-    """SQLAlchemy schema for 'hashes' table"""
-    __tablename__   = 'hashes'
-
-    id          = Column(Integer, primary_key=True)
-    ufid        = Column(String(10), unique=True)
-    phash       = Column(String(56))
-    dhash       = Column(String(56))
-    whash       = Column(String(64))
 
 class Data(object):
     """Library specific data functions wrapper"""
