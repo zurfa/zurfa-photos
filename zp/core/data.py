@@ -1,23 +1,14 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import scoped_session, sessionmaker, defer
+from sqlalchemy.orm import defer
 import sqlalchemy.exc
 # zp
-import zp.config as config
+# import zp.config as config
 # zp.core
+from zp.core.database import db_session
 import logger
 # zp.models
 from zp.models.library import Library
-from zp.models.library import Hashes
+from zp.models.hashes import Hashes
 
-
-
-engine  = create_engine('sqlite:///%s' % config.DATABASE, echo=False)
-db_session = scoped_session(sessionmaker(autocommit=False,
-                                         autoflush=False,
-                                         bind=engine))
-Base    = declarative_base()
-Base.query = db_session.query_property()
 
 lg = logger.Logger()
 lg.setup(__name__)
