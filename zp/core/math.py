@@ -1,16 +1,18 @@
 
 
-def image_constraints(wh, Max):
-    """returns new image size constraints based on Max"""
+def image_constraints(wh, max):
+    """returns new image size constraints based on max."""
     Width, Height   = wh
     Ratio   = float(Width)/float(Height)
 
     if Width > Height:
-        Size    = (Max,int(Max/Ratio))
+        Size    = (max,int(max/Ratio))
         return Size
     elif Width < Height:
-        Size    = (int(Max*Ratio),Max)
+        Size    = (int(max*Ratio),max)
         return Size
     else:
-        Size    = (Max,Max)
+        Size    = (max,max)
         return Size
+
+
