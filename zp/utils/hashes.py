@@ -39,6 +39,7 @@ def make_all_hashes():
             print "Generated whash for %s%s [%s]" % (item['ufid'], item['extension'], hashes['whash'])
 
         hashes.update({'ufid':item['ufid']})
-        print Data.add_to_hashes(hashes)def make_hamming():
+        print Data.add_to_hashes(hashes)
+
 def make_hamming():
     pass
