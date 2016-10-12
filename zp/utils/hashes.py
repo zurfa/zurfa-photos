@@ -1,6 +1,7 @@
 # zp.core
 from zp.core.image import Image
 from zp.core.data import Data
+import zp.core.math as math
 
 def make_hash(TYPE,File):
     im = Image()
@@ -38,4 +39,6 @@ def make_all_hashes():
             print "Generated whash for %s%s [%s]" % (item['ufid'], item['extension'], hashes['whash'])
 
         hashes.update({'ufid':item['ufid']})
-        print Data.add_to_hashes(hashes)
+        print Data.add_to_hashes(hashes)def make_hamming():
+def make_hamming():
+    pass
