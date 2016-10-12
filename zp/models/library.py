@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Numeric, LargeBinary
 import time
 # zp.core
-from zp.core.data import Base
+from zp.core.database import Base
 
 
 class Library(Base):
@@ -26,3 +26,6 @@ class Library(Base):
     width       = Column(Integer)
     height      = Column(Integer)
     exif_dump   = Column(LargeBinary)
+
+    def __init__(self, ufid=None):
+        self.ufid = ufid

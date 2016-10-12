@@ -1,7 +1,6 @@
-from sqlalchemy import Column, Integer, String, Numeric, LargeBinary
+from sqlalchemy import Column, Integer, String
 # zp.core
-from zp.core.data import Data
-from zp.core.data import Base
+from zp.core.database import Base
 
 
 class Hashes(Base):
