@@ -16,3 +16,8 @@ def image_constraints(wh, max):
         return Size
 
 
+def hamming(primary, secondary):
+    """Returns hamming distance between two hashes."""
+    if len(primary) != len(secondary):
+        raise ValueError("Undefined for sequences of unequal length")
+    return sum(el1 != el2 for el1, el2 in zip(primary, secondary))
