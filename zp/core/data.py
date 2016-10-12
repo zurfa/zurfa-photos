@@ -51,3 +51,33 @@ class Data(object):
                 item = item.__dict__
                 data.append(item)
             return data
+
+    @staticmethod
+    def add_to_hashes(data, close=True):
+        try:
+            item = Hashes(**data)
+            db_session.add(item)
+            db_session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return False
+        else:
+            return True
+        finally:
+            if close:
+                db_session.remove()
+
+    @staticmethod
+    def get_from_hashes(ufid=False):
+        try:
+            if ufid:
+                Query = db_session.query(Hashes).filter(Library.ufid == ufid)
+            else:
+                Query = db_session.query(Hashes)
+        except sqlalchemy.exc.IntegrityError:
+            return False
+        else:
+            data = []
+            for item in Query:
+                item = item.__dict__
+                data.append(item)
+            return data
