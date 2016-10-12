@@ -20,10 +20,10 @@ class Data(object):
         super(Data, self).__init__()
 
     @staticmethod
-    def add_to_library(data,Close=True):
+    def add_to_library(data, close=True):
         # library = session.query(Library)
         try:
-            item    = Library(**data)
+            item = Library(**data)
             db_session.add(item)
             db_session.commit()
         except sqlalchemy.exc.IntegrityError:
@@ -32,14 +32,17 @@ class Data(object):
         else:
             return True
         finally:
-            if Close:
+            if close:
                 db_session.remove()
 
     @staticmethod
-    def get_from_library():
+    def get_from_library(ufid=False):
         try:
-            Query   = db_session.query(Library)
-            Query   = Query.options(defer('exif_dump'))
+            if ufid:
+                Query   = db_session.query(Library).filter(Library.ufid == ufid)
+            else:
+                Query = db_session.query(Library)
+            Query = Query.options(defer('exif_dump'))
         except sqlalchemy.exc.IntegrityError:
             return False
         else:
