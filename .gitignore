@@ -99,3 +99,4 @@ ENV/
 docs/
 image-compression
 test.py
+.idea/**
