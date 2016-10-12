@@ -1,9 +1,9 @@
-# zp.core
-import zp.core.logger as logger
+from PIL import Image, ImageDraw as PIL
 # zp
 import zp.config as config
-
-from PIL import Image, ImageDraw as PIL
+# zp.core
+import zp.core.logger as logger
+import zp.core.math as math
 import imagehash
 
 

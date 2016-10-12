@@ -1,6 +1,4 @@
-import logger
-import config
-    
+
 
 def image_constraints(wh, Max):
     """returns new image size constraints based on Max"""
