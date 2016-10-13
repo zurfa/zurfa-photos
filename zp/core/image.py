@@ -63,10 +63,12 @@ class Image(object):
             else:
                 return  (Image,Options)
 
-    def large_thumb(self,File,Dest=False,Obj=False):
-        if Obj:
+    def large_thumb(self,File,Dest=False):
+        if type(File) is PIL.JpegImageFile:
+            Close   = False
             Image   = File
         else:
+            Close   = True
             Image   = self.open_image(File)
 
         # Set additional options
@@ -80,39 +82,47 @@ class Image(object):
             Image   = Image.resize(Size,resample=PIL.Image.BILINEAR)
             # self.lg.logger.info("Generated new large thumbnail object for %s" % File)
             if Dest:
+                if Close:
+                    Image.close()
                 return  (Image,Dest,Options)
             else:
                 return  (Image,Options)
         else:
             return False
 
-    def medium_thumb(self,File,Dest=None,Obj=False):
-        if Obj:
+    def medium_thumb(self,File,Dest=False):
+        if type(File) is PIL.JpegImageFile:
+            Close   = False
             Image   = File
         else:
+            Close   = True
             Image   = self.open_image(File)
 
         # Set additional options
         Options = {}
         Options['quality']  = config.MEDIUM_THUMB_QUALITY
         Options['optimize'] = True
-        Options['qtables']  = 'web_low'
+        Options['qtables']  = 'web_high'
 
         if Image:
             Size    = math.image_constraints(Image.size,config.MEDIUM_THUMB_SIZE)
             Image   = Image.resize(Size,resample=PIL.Image.BILINEAR)
             # self.lg.logger.info("Generated new medium thumbnail object for %s" % File)
             if Dest:
+                if Close:
+                    Image.close()
                 return  (Image,Dest,Options)
             else:
                 return  (Image,Options)
         else:
             return False
 
-    def small_thumb(self,File,Dest=None,Obj=False):
-        if Obj:
+    def small_thumb(self,File,Dest=False):
+        if type(File) is PIL.JpegImageFile:
+            Close   = False
             Image   = File
         else:
+            Close   = True
             Image   = self.open_image(File)
 
         # Set additional options
