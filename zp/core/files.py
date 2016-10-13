@@ -1,12 +1,12 @@
-import logger
-import config
-import exp
-
 import os
 import time
 import shutil
 import hashlib
-import logging
+# zp
+import zp.config as config
+import zp.exp as exp
+# zp.core
+import zp.core.logger as logger
 
 
 class Files(object):
@@ -69,7 +69,7 @@ class Files(object):
 
     def close_file(self,Handle):
         """Takes a file handle and closes it"""
-            return Handle.close()
+        return Handle.close()
 
     def copy_file(self,In,Out):
         """Copy file from In path to Out path"""
