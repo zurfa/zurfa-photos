@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw as PIL
+from PIL import Image, ImageDraw, JpegImagePlugin as PIL
 # zp
 import zp.config as config
 # zp.core
@@ -126,6 +126,8 @@ class Image(object):
             Image   = Image.resize(Size,resample=PIL.Image.BILINEAR)
             # self.lg.logger.info("Generated new small thumbnail object for %s" % File)
             if Dest:
+                if Close:
+                    Image.close()
                 return  (Image,Dest,Options)
             else:
                 return  (Image,Options)
@@ -144,41 +146,65 @@ class Image(object):
     def p_hash(self,Image,Size=None):
         if not Size:
             Size    = config.PHASH_SIZE
+        if type(Image) is PIL.JpegImageFile:
+            Close   = False
+            ImageF  = Image
+        else:
+            Close   = True
+            ImageF  = self.open_image(Image)
 
-        ImageF  = self.open_image(Image)
         if Image:
             Hash    = str(imagehash.phash(ImageF,Size)).upper()
             # self.lg.logger.info("Generated new PHASH for %s %s" % (Image,Hash))
-            return Hash
         else:
-            return False
-        ImageF.close()
+            Hash    = False
+
+        if Close:
+            ImageF.close()
+
+        return Hash
 
     def d_hash(self,Image,Size=None):
         if not Size:
             Size    = config.DHASH_SIZE
+        if type(Image) is PIL.JpegImageFile:
+            Close   = False
+            ImageF  = Image
+        else:
+            Close   = True
+            ImageF  = self.open_image(Image)
 
-        ImageF  = self.open_image(Image)
         if Image:
             Hash    = str(imagehash.dhash(ImageF,Size)).upper()
             # self.lg.logger.info("Generated new DHASH for %s %s" % (Image,Hash))
-            return Hash
         else:
-            return False
-        ImageF.close()
+            Hash    = False
+
+        if Close:
+            ImageF.close()
+
+        return Hash
 
     def w_hash(self,Image,Size=None):
         if not Size:
             Size    = config.WHASH_SIZE
+        if type(Image) is PIL.JpegImageFile:
+            Close   = False
+            ImageF  = Image
+        else:
+            Close   = True
+            ImageF  = self.open_image(Image)
 
-        ImageF  = self.open_image(Image)
         if Image:
             Hash    = str(imagehash.whash(ImageF,Size)).upper()
             # self.lg.logger.info("Generated new WHASH for %s %s" % (Image,Hash))
-            return Hash
         else:
-            return False
-        ImageF.close()
+            Hash    = False
+
+        if Close:
+            ImageF.close()
+
+        return Hash
 
 
     @staticmethod
