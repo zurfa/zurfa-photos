@@ -17,4 +17,3 @@ class Library(Base):
         self.secondary  = secondary
         self.type       = type
         self.value      = value
-        
