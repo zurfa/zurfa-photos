@@ -89,3 +89,14 @@ ENV/
 .ropeproject
 
 /*.jpg
+
+
+
+*.xz
+*.db
+*.db.*
+*.sublime-*
+docs/
+image-compression
+test.py
+.idea/**

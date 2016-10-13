@@ -2,6 +2,7 @@ UFID_LENGTH	= 10
 
 PHASH_SIZE	= 15
 DHASH_SIZE	= 15
+WHASH_SIZE  = 16
 
 # Thumbnails
 LARGE_THUMB_SIZE		= 500
@@ -23,5 +24,6 @@ DIR_THUMBS_L	= '/mnt/library/data/thumbs/large/'
 DIR_THUMBS_M	= '/mnt/library/data/thumbs/medium/'
 DIR_THUMBS_S	= '/mnt/library/data/thumbs/small/'
 DIR_THUMBS_SQ	= '/mnt/library/data/thumbs/square/'
+DATABASE        = '/mnt/library/code/zurfa-photos/library.db'
 
 DIR_PROC_FORMAT	= "import_%Y%m%d_%H%M%S/"

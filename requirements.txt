@@ -1,0 +1,10 @@
+ExifRead==2.1.2
+ImageHash==3.0
+imagesize==0.7.1
+MySQL-python==1.2.5
+numpy==1.11.1
+Pillow==3.3.1
+PyWavelets==0.4.0
+scipy==0.18.1
+SQLAlchemy==1.1.0
+
