@@ -1,6 +1,6 @@
 # zurfa-photos
 
-Nothing special about it ;)
+MASTER is NOT stable
 
 ## TODO
 
