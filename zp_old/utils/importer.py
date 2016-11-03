@@ -3,17 +3,17 @@ import string
 import time
 import os
 # zp
-import zp.config as config
-import zp.exp as exp
+import zp_old.config as config
+import zp_old.exp as exp
 # zp.core
-import zp.core.logger as logger
-import zp.core.files as files
-import zp.core.exif as exif
-import zp.core.image as image
-import zp.core.data as data
+import zp_old.core.logger as logger
+import zp_old.core.files as files
+import zp_old.core.exif as exif
+import zp_old.core.image as image
+import zp_old.core.data as data
 # zp.utils
-import zp.utils.hashes as hashes
-import zp.utils.thumbs as thumbs
+import zp_old.utils.hashes as hashes
+import zp_old.utils.thumbs as thumbs
 
 lg = logger.Logger()
 lg.setup(__name__)

@@ -3,10 +3,10 @@ import time
 import shutil
 import hashlib
 # zp
-import zp.config as config
-import zp.exp as exp
+import zp_old.config as config
+import zp_old.exp as exp
 # zp.core
-import zp.core.logger as logger
+import zp_old.core.logger as logger
 
 
 class Files(object):

@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Numeric, LargeBinary
 import time
 # zp.core
-from zp.core.database import Base
+from zp_old.core.database import Base
 
 
 class Library(Base):

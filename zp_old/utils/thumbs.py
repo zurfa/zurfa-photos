@@ -1,9 +1,9 @@
 import os
 # zp
-import zp.config as config
+import zp_old.config as config
 # zp.core
-import zp.core.image as image
-import zp.core.data as data
+import zp_old.core.image as image
+import zp_old.core.data as data
 
 def make_thumbs(File):
     """Makes all sizes of thumbnails in default directories."""

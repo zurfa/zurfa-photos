@@ -1,9 +1,9 @@
 from PIL import Image, ImageDraw, JpegImagePlugin as PIL
 # zp
-import zp.config as config
+import zp_old.config as config
 # zp.core
-import zp.core.logger as logger
-import zp.core.math as math
+import zp_old.core.logger as logger
+import zp_old.core.math as math
 import imagehash
 
 

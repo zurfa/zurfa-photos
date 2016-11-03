@@ -3,11 +3,11 @@ import sqlalchemy.exc
 # zp
 # import zp.config as config
 # zp.core
-from zp.core.database import db_session
+from zp_old.core.database import db_session
 import logger
 # zp.models
-from zp.models.library import Library
-from zp.models.hashes import Hashes
+from zp_old.models.library import Library
+from zp_old.models.hashes import Hashes
 
 
 lg = logger.Logger()

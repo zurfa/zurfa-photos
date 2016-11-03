@@ -1,7 +1,7 @@
 # zp.core
-from zp.core.image import Image
-from zp.core.data import Data
-import zp.core.math as math
+from zp_old.core.image import Image
+from zp_old.core.data import Data
+import zp_old.core.math as math
 
 def make_hash(TYPE,File):
     im = Image()
