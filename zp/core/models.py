@@ -69,3 +69,22 @@ class Hashes(db.Model):
 
     def __init__(self, ufid=None):
         self.ufid = ufid
+
+
+class Thumbs(db.Model):
+    """SQLAlchemy schema for 'thumbnails' table"""
+    __tablename__   = 'thumbnails'
+
+    ufid        = db.Column(db.String(10), primary_key=True, unique=True)
+    large       = db.Column(db.Boolean)
+    medium      = db.Column(db.Boolean)
+    small       = db.Column(db.Boolean)
+    square      = db.Column(db.Boolean)
+
+
+    def __init__(self, ufid=None, large=None, medium=None, small=None, square=None):
+        self.ufid = ufid
+        self.large = large
+        self.medium = medium
+        self.small = small
+        self.square = square
