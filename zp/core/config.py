@@ -24,9 +24,17 @@ THUMBS_MEDIUM_DIR = THUMBS_DIR + 'medium/'
 THUMBS_SMALL_DIR = THUMBS_DIR + 'small/'
 THUMBS_SQUARE_DIR = THUMBS_DIR + 'square/'
 
-# Miscellaneous settings
+# Miscellaneous
 VALID_EXTENSIONS = ['.jpg', '.jpeg']
 UFID_LENGTH = 10
+DIR_PROC_FORMAT	= "import_%Y%m%d_%H%M%S/"
+
+# Hashes
+PHASH_SIZE	= 15
+DHASH_SIZE	= 15
+WHASH_SIZE  = 16
+
+# Thumbnails
 LARGE_THUMB_SIZE		= 500
 MEDIUM_THUMB_SIZE		= 250
 SMALL_THUMB_SIZE		= 100
