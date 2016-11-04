@@ -101,3 +101,7 @@ docs/
 image-compression
 test.py
 .idea/**
+
+zp_old/
+zpl/
+2/
